@@ -1,9 +1,11 @@
 import {
+  Alert,
   KeyboardTypeOptions,
   StyleProp,
   StyleSheet,
   Text,
   TextInput,
+  TextInputProps,
   TextStyle,
   TouchableOpacity,
   View,
@@ -15,26 +17,18 @@ import { useState } from "react";
 import useEyeVisibility from "../hooks/useEyeVisibility";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-interface TextInputWithLabelProps {
+interface TextInputWithLabelProps extends TextInputProps {
   label: string;
-  value: string;
-  onChangeText: (text: string) => void;
-  placeholder?: string;
-  secureTextEntry?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
-  keyboardType?: KeyboardTypeOptions;
 }
 
 export default function TextInputWithLabel({
   label,
-  value,
-  onChangeText,
-  placeholder,
   secureTextEntry,
   containerStyle,
   inputStyle,
-  keyboardType,
+  ...rest
 }: TextInputWithLabelProps) {
   const [isFocus, setIsFocus] = useState(false);
   const eye = useEyeVisibility();
@@ -45,13 +39,10 @@ export default function TextInputWithLabel({
       <TextInput
         style={[styles.input, isFocus && styles.inputFocus, inputStyle]}
         placeholderTextColor={Colors.gray500}
-        placeholder={placeholder}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
-        value={value}
-        onChangeText={onChangeText}
         secureTextEntry={secureTextEntry && !eye.isVisible}
-        keyboardType={keyboardType}
+        {...rest}
       />
       {secureTextEntry && (
         <TouchableOpacity

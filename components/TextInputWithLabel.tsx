@@ -1,9 +1,11 @@
 import {
+  StyleProp,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from "react-native";
 import { FontFamily } from "../styles/FontFamily";
 import { Colors } from "../styles/Colors";
@@ -16,6 +18,7 @@ interface TextInputWithLabelProps {
   value: string;
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 export default function TextInputWithLabel({
@@ -23,12 +26,13 @@ export default function TextInputWithLabel({
   value,
   onChangeText,
   secureTextEntry,
+  containerStyle,
 }: TextInputWithLabelProps) {
   const [isFocus, setIsFocus] = useState(false);
   const eye = useEyeVisibility();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={[styles.input, isFocus && styles.inputFocus]}

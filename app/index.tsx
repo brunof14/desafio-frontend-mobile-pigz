@@ -27,12 +27,14 @@ export default function LoginScreen() {
         <Text style={[styles.loginText, { marginBottom: 16 }]}>Login</Text>
         <TextInputWithLabel
           label="Email ou Telefone"
+          placeholder="example@pigz.com.br"
           value={emailOrPhone}
           onChangeText={setEmailOrPhone}
           containerStyle={{ marginBottom: 16 }}
         />
         <TextInputWithLabel
           label="Senha"
+          placeholder="*****"
           value={password}
           onChangeText={setPassword}
           secureTextEntry

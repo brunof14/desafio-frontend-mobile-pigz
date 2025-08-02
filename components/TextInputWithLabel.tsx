@@ -1,8 +1,10 @@
 import {
+  KeyboardTypeOptions,
   StyleProp,
   StyleSheet,
   Text,
   TextInput,
+  TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -17,16 +19,22 @@ interface TextInputWithLabelProps {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
+  placeholder?: string;
   secureTextEntry?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<TextStyle>;
+  keyboardType?: KeyboardTypeOptions;
 }
 
 export default function TextInputWithLabel({
   label,
   value,
   onChangeText,
+  placeholder,
   secureTextEntry,
   containerStyle,
+  inputStyle,
+  keyboardType,
 }: TextInputWithLabelProps) {
   const [isFocus, setIsFocus] = useState(false);
   const eye = useEyeVisibility();
@@ -35,14 +43,15 @@ export default function TextInputWithLabel({
     <View style={[styles.container, containerStyle]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
-        style={[styles.input, isFocus && styles.inputFocus]}
+        style={[styles.input, isFocus && styles.inputFocus, inputStyle]}
         placeholderTextColor={Colors.gray500}
-        placeholder="example"
+        placeholder={placeholder}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry && !eye.isVisible}
+        keyboardType={keyboardType}
       />
       {secureTextEntry && (
         <TouchableOpacity
@@ -69,11 +78,12 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   input: {
+    height: 50,
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: Colors.gray400,
     borderRadius: 16,
-    padding: 16,
+    paddingHorizontal: 16,
     fontFamily: FontFamily.Poppins.regular,
     color: Colors.gray750,
   },

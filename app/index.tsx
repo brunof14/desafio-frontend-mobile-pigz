@@ -8,11 +8,14 @@ import PrimaryButton from "../components/PrimaryButton";
 import TextInputWithLabel from "../components/TextInputWithLabel";
 import { Colors } from "../styles/Colors";
 import { FontFamily } from "../styles/FontFamily";
+import { useNavigation, useRouter } from "expo-router";
 
 export default function LoginScreen() {
   const safeAreaInsets = useSafeAreaInsets();
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   return (
     <View style={[styles.container, { paddingTop: safeAreaInsets.top }]}>
@@ -38,7 +41,7 @@ export default function LoginScreen() {
           <Text style={styles.forgetPasswordText}>Esqueci minha senha</Text>
         </TouchableOpacity>
 
-        <PrimaryButton text="Entrar" />
+        <PrimaryButton text="Entrar" onPress={() => router.push("/(tabs)")} />
 
         <TouchableOpacity style={styles.createAccountLinkContainer}>
           <Text style={styles.createAccountText}>
@@ -79,8 +82,8 @@ const styles = StyleSheet.create({
   },
   signInWithContainer: {
     gap: 6,
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center",
   },
   headerLogoText: {
     fontFamily: FontFamily.Poppins.semiBold,

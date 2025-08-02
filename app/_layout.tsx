@@ -12,6 +12,9 @@ import {
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
+import { Colors } from "../styles/Colors";
+
+import NavigationHeader from "../components/NavigationHeader";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,8 +40,18 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        header: (props) => <NavigationHeader {...props} />,
+        contentStyle: { backgroundColor: Colors.white },
+      }}
+    >
       <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="new-delivery/[deliveryId]"
+        options={{ title: "Nova Entrega" }}
+      />
     </Stack>
   );
 }

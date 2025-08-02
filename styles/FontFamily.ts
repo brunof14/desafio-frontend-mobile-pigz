@@ -10,4 +10,4 @@ export const FontFamily = {
     semiBold: "Poppins_600SemiBold",
     bold: "Poppins_700Bold",
   },
-};
+} as const;

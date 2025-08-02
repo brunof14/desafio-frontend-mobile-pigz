@@ -1,11 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { Colors } from "../styles/Colors";
-import TextInputWithLabel from "../components/TextInputWithLabel";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { FontFamily } from "../styles/FontFamily";
 import { useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PigzLogoSvg from "../components/assets/PigzLogoSvg";
+import GoogleSignButton from "../components/GoogleSignButton";
+import PrimaryButton from "../components/PrimaryButton";
+import TextInputWithLabel from "../components/TextInputWithLabel";
+import { Colors } from "../styles/Colors";
+import { FontFamily } from "../styles/FontFamily";
 
 export default function LoginScreen() {
   const safeAreaInsets = useSafeAreaInsets();
@@ -18,7 +20,7 @@ export default function LoginScreen() {
         <PigzLogoSvg />
         <Text style={styles.headerLogoText}>Para entregadores</Text>
       </View>
-      <View>
+      <View style={{ marginBottom: 32 }}>
         <Text style={[styles.loginText, { marginBottom: 16 }]}>Login</Text>
         <TextInputWithLabel
           label="Email ou Telefone"
@@ -35,6 +37,22 @@ export default function LoginScreen() {
         <TouchableOpacity style={styles.forgetPasswordContainer}>
           <Text style={styles.forgetPasswordText}>Esqueci minha senha</Text>
         </TouchableOpacity>
+
+        <PrimaryButton text="Entrar" />
+
+        <TouchableOpacity style={styles.createAccountLinkContainer}>
+          <Text style={styles.createAccountText}>
+            Não tem uma Conta?{" "}
+            <Text style={{ color: Colors.orange500Alt }}>Criar agora!</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <View style={[styles.signInWithContainer, { marginBottom: 24 }]}>
+          <Text style={styles.signInWithText}>Entrar com</Text>
+          <View style={styles.bar} />
+        </View>
+        <GoogleSignButton />
       </View>
     </View>
   );
@@ -55,6 +73,15 @@ const styles = StyleSheet.create({
   forgetPasswordContainer: {
     marginVertical: 24,
   },
+  createAccountLinkContainer: {
+    marginTop: 16,
+    padding: 16,
+  },
+  signInWithContainer: {
+    gap: 6,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   headerLogoText: {
     fontFamily: FontFamily.Poppins.semiBold,
     fontSize: 18,
@@ -71,5 +98,22 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: Colors.gray700,
     textDecorationLine: "underline",
+  },
+  createAccountText: {
+    fontFamily: FontFamily.Poppins.regular,
+    fontSize: 13,
+    textAlign: "center",
+  },
+  signInWithText: {
+    fontFamily: FontFamily.Poppins.semiBold,
+    fontSize: 13,
+    color: Colors.gray600,
+  },
+  bar: {
+    flex: 1,
+    height: 1,
+    borderStyle: "solid",
+    borderTopColor: Colors.gray600,
+    borderTopWidth: 1,
   },
 });

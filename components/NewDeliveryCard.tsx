@@ -15,7 +15,9 @@ export default function NewDeliveryCard() {
 
   function handlePressNewDelivery() {
     if (!deliveryId) return;
-    router.push(`/new-delivery/${deliveryId}`);
+    const id = deliveryId;
+    setDeliveryId("");
+    router.push(`/new-delivery/${id}`);
   }
 
   return (
@@ -26,6 +28,7 @@ export default function NewDeliveryCard() {
           label="Número de Identificação"
           value={deliveryId}
           onChangeText={setDeliveryId}
+          onSubmitEditing={handlePressNewDelivery}
           containerStyle={{ flex: 1 }}
           inputStyle={{
             height: 46,

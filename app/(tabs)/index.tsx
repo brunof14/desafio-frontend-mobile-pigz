@@ -1,14 +1,41 @@
-import { Text, View } from "react-native";
-import PrimaryButton from "../../components/PrimaryButton";
-import QrCodeSvg from "../../components/assets/QrCodeSvg";
-import { useRouter } from "expo-router";
+import {
+  Keyboard,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import DeliverySummaryCard from "../../components/DeliverySummaryCard";
+import EarningsOfDayCard from "../../components/EarningsOfDayCard";
+import NewDeliveryCard from "../../components/NewDeliveryCard";
+import useKeyboard from "../../hooks/useKeyboard";
 
 export default function OverviewTabScreen() {
-  const router = useRouter()
+  const { keyboardIsVisible } = useKeyboard();
+
   return (
-    <View style={{ flex: 1 }}>
-      <Text>Visão Geral</Text>
-      <PrimaryButton icon={<QrCodeSvg />} text="Escanear Qrcode" onPress={() =>router.push('/new-delivery/123')}/>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <View style={styles.contentContainer}>
+          {!keyboardIsVisible && (
+            <>
+              <EarningsOfDayCard earnings={150} date={new Date()} />
+              <DeliverySummaryCard accepted={15} rejected={5} total={20} />
+            </>
+          )}
+
+          <NewDeliveryCard />
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingTop: 60,
+    paddingHorizontal: 24,
+    gap: 32,
+  },
+});

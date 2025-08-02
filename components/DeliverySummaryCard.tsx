@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.Poppins.bold,
     fontSize: 16,
     marginBottom: 16,
+    color: Colors.gray800,
   },
   cardsContainer: {
     flexDirection: "row",

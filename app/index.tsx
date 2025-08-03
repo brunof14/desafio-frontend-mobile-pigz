@@ -1,22 +1,33 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-import { useState } from "react";
+import { useRouter } from "expo-router";
+import { useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PigzLogoSvg from "../components/assets/PigzLogoSvg";
 import GoogleSignButton from "../components/GoogleSignButton";
 import PrimaryButton from "../components/PrimaryButton";
 import TextInputWithLabel from "../components/TextInputWithLabel";
+import useKeyboard from "../hooks/useKeyboard";
 import { Colors } from "../styles/Colors";
 import { FontFamily } from "../styles/FontFamily";
-import { useNavigation, useRouter } from "expo-router";
-import useKeyboard from "../hooks/useKeyboard";
 
 export default function LoginScreen() {
+  const passwordRef = useRef<TextInput>(null);
   const safeAreaInsets = useSafeAreaInsets();
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const { keyboardIsVisible } = useKeyboard();
   const router = useRouter();
+
+  function handlePressSubmit() {
+    router.push("/(tabs)");
+  }
 
   return (
     <View style={[styles.container, { paddingTop: safeAreaInsets.top }]}>
@@ -37,6 +48,9 @@ export default function LoginScreen() {
           value={emailOrPhone}
           onChangeText={setEmailOrPhone}
           containerStyle={{ marginBottom: 16 }}
+          onSubmitEditing={() => passwordRef.current?.focus()}
+          submitBehavior="submit"
+          returnKeyType="next"
         />
         <TextInputWithLabel
           label="Senha"
@@ -44,12 +58,14 @@ export default function LoginScreen() {
           value={password}
           onChangeText={setPassword}
           secureTextEntry
+          onSubmitEditing={handlePressSubmit}
+          ref={passwordRef}
         />
         <TouchableOpacity style={styles.forgetPasswordContainer}>
           <Text style={styles.forgetPasswordText}>Esqueci minha senha</Text>
         </TouchableOpacity>
 
-        <PrimaryButton text="Entrar" onPress={() => router.push("/(tabs)")} />
+        <PrimaryButton text="Entrar" onPress={handlePressSubmit} />
 
         <TouchableOpacity style={styles.createAccountLinkContainer}>
           <Text style={styles.createAccountText}>

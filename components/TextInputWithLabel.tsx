@@ -1,6 +1,6 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useState } from "react";
 import {
-  Alert,
-  KeyboardTypeOptions,
   StyleProp,
   StyleSheet,
   Text,
@@ -9,18 +9,17 @@ import {
   TextStyle,
   TouchableOpacity,
   View,
-  ViewStyle,
+  ViewStyle
 } from "react-native";
-import { FontFamily } from "../styles/FontFamily";
-import { Colors } from "../styles/Colors";
-import { useState } from "react";
 import useEyeVisibility from "../hooks/useEyeVisibility";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Colors } from "../styles/Colors";
+import { FontFamily } from "../styles/FontFamily";
 
 interface TextInputWithLabelProps extends TextInputProps {
   label: string;
   containerStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
+  ref?: React.Ref<TextInput>;
 }
 
 export default function TextInputWithLabel({
@@ -28,6 +27,7 @@ export default function TextInputWithLabel({
   secureTextEntry,
   containerStyle,
   inputStyle,
+  ref,
   ...rest
 }: TextInputWithLabelProps) {
   const [isFocus, setIsFocus] = useState(false);
@@ -42,6 +42,7 @@ export default function TextInputWithLabel({
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         secureTextEntry={secureTextEntry && !eye.isVisible}
+        ref={ref}
         {...rest}
       />
       {secureTextEntry && (

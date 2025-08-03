@@ -12,14 +12,14 @@ Este projeto é um desafio técnico para vaga de Frontend Mobile na Pigz.
 
 ## Como rodar o projeto
 
-1. **Baixe o projeto e entre no diretório:**:
+1. **Baixe o projeto e entre no diretório:**
 
 ```bash
   git clone https://github.com/brunof14/desafio-frontend-mobile-pigz.git
   cd desafio-frontend-mobile-pigz
 ```
 
-2. **Instale as dependências:**:
+2. **Instale as dependências:**
 
 ```bash
   npm install

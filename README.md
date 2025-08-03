@@ -15,8 +15,8 @@ Este projeto é um desafio técnico para vaga de Frontend Mobile na Pigz.
 1. **Baixe o projeto e entre no diretório:**:
 
 ```bash
-  git clone [link_do_projeto]
-  cd [link_do_projeto]
+  git clone https://github.com/brunof14/desafio-frontend-mobile-pigz.git
+  cd desafio-frontend-mobile-pigz
 ```
 
 2. **Instale as dependências:**:

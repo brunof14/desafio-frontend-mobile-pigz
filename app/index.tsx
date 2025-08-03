@@ -9,17 +9,23 @@ import TextInputWithLabel from "../components/TextInputWithLabel";
 import { Colors } from "../styles/Colors";
 import { FontFamily } from "../styles/FontFamily";
 import { useNavigation, useRouter } from "expo-router";
+import useKeyboard from "../hooks/useKeyboard";
 
 export default function LoginScreen() {
   const safeAreaInsets = useSafeAreaInsets();
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
-
+  const { keyboardIsVisible } = useKeyboard();
   const router = useRouter();
 
   return (
     <View style={[styles.container, { paddingTop: safeAreaInsets.top }]}>
-      <View style={styles.headerLogoContainer}>
+      <View
+        style={[
+          styles.headerLogoContainer,
+          keyboardIsVisible && styles.headerLogoContainerWhenKeyboardOpen,
+        ]}
+      >
         <PigzLogoSvg />
         <Text style={styles.headerLogoText}>Para entregadores</Text>
       </View>
@@ -74,6 +80,9 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: 80,
     marginBottom: 36,
+  },
+  headerLogoContainerWhenKeyboardOpen: {
+    marginTop: 40,
   },
   forgetPasswordContainer: {
     marginVertical: 24,

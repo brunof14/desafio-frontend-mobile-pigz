@@ -9,6 +9,7 @@ import NavigationHeader from "../../components/NavigationHeader";
 export default function TabLayout() {
   return (
     <Tabs
+      backBehavior="none"
       screenOptions={{
         tabBarActiveTintColor: Colors.orange500Alt,
         headerTitleAlign: "center",

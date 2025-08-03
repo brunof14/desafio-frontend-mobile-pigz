@@ -11,6 +11,8 @@ import { moneyFormatter } from "../../utils/moneyFormatter";
 
 const deliverySummaryMockData = {
   totalDistance: "8km",
+  deliveryCost: 13.75,
+  estimateTime: "30 Min",
   collect: {
     location: "Restaurante Recanto da Peixada",
     distance: "2km",
@@ -32,13 +34,16 @@ export default function NewDeliveryScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <InfoItem label="Tempo Estimado" value="30 Min" />
+        <InfoItem
+          label="Tempo Estimado"
+          value={deliverySummaryMockData.estimateTime}
+        />
         <InfoItem label="Número de ID" value={`#${deliveryId}`} />
       </View>
       <View style={{ marginTop: 20, marginBottom: 35 }}>
         <InfoItem
           label="Valor da Entrega"
-          value={moneyFormatter.real(13.75)}
+          value={moneyFormatter.real(deliverySummaryMockData.deliveryCost)}
           variant="big"
         />
       </View>
